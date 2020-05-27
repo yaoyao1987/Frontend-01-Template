@@ -1,0 +1,10 @@
+<div id="app">
+  <span v-for="v, i of bits">
+    <input :class="i > 0 ? i > 11 ? 'fraction' :'exponent':'sign' "  type="number" min=0 max=1 v-model="bits[i]"/>
+    <input v-if="i == 31" />
+    <br v-if="i == 31" />
+  </span>
+  <br />
+  <input style="width:5em;" v-model="value"/>
+  
+</div>

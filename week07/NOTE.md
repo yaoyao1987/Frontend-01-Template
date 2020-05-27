@@ -1,6 +1,13 @@
-# 每周总结可以写在这里
+# week07
 
-https://www.runoob.com/w3cnote/flex-grammar.html
-https://github.com/spritejs/sprite-core/commit/8757b4d3888b4f237b1089e94e075ab58ca952a6#diff-677d382da9f8d81f61d50af24f937b32R32
-https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-https://www.npmjs.com/package/images、
+## 作业
+
+1. 跟着课程完成 toy-browser
+   [toy-browser](./toy-browser)
+2. 画一个 CSS 的脑图
+   ![css脑图](./css.png)
+3. 跟着课程跑一跑两个小实验程序
+   _[css 标准](./css-standards.js)
+   _[css 标准爬虫](./css-crawler.js)
+
+## 总结

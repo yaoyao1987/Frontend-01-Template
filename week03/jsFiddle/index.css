@@ -1,0 +1,22 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.container input[type='number']{
+    -moz-appearance: textfield;
+}
+span {
+  padding:0;
+  margin:0;
+}
+input {
+  width:1em;
+  height:2em;
+  text-align:center;
+}
+.sign {
+  background-color: lightblue;
+} 
+.exponent {
+  background-color: orange;
+} 
