@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div#a.b .c[id='x'] {
+        color: red;
+      }
+      #a:not(#b) {
+        color: black;
+      }
+      * .a {
+        color: blue;
+      }
+      div.a {
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="a" class="b">
+      <div id="x" class="c d">red</div>
+    </div>
+    <script>
+      function _match(selector, element) {
+        let matched = true;
+        let attributes = [...element.attributes];
+        // tag, id, cls, attr
+        selector.match(/^([a-z]+)?(#[a-z]+)?(\.[a-z]+)?(\[[a-z]+=[a-z]+\])?$/);
+        const tag = RegExp.$1;
+        const id = RegExp.$2;
+        const cls = RegExp.$3;
+        const attr = RegExp.$4;
+        // tag
+        if (tag) {
+          if (element.tagName !== tag.toUpperCase()) {
+            matched = false;
+          }
+        }
+        if (id) {
+          // id
+          let attr = attributes.filter((attr) => attr.name === 'id')[0];
+          if (!attr || !attr.value.includes(id.replace('#', ''))) {
+            matched = false;
+          }
+        }
+        if (cls) {
+          let attr = attributes.filter((attr) => attr.name === 'class')[0];
+          if (!attr || !attr.value.includes(cls.replace('.', ''))) {
+            matched = false;
+          }
+        }
+        if (attr) {
+        }
+
+        return matched;
+      }
+
+      // 元素和简单选择器是否匹配
+      function match(selector, element) {
+        if (!selector || !element.attributes) {
+          return false;
+        }
+
+        let selectorArr = selector.split(' ').reverse();
+
+        return selectorArr.every((sel, index) => {
+          index && (element = element.parentElement);
+          return _match(sel, element);
+        });
+      }
+
+      match('div#a.b .c', document.getElementById('x'));
+    </script>
+  </body>
+</html>
