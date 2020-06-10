@@ -117,8 +117,7 @@ match('div#a.b .c', document.getElementById('x'));
 
 1. 盒(Box)模型
 2. 排版
-
-Vertical-align：
+   Vertical-align：
 
 - Vertical-align: baseline，是拿自己的 baseline 去对其行的 baseline
 - Vertical-align: top，middle，bottom，是拿自己的 ”顶部“ “中线” ”底部“ 去对其行的 ”顶部“ “中线” ”底部“
