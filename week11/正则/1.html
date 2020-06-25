@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .keywords {
+        color: blue;
+      }
+      .punctuator {
+        color: blueviolet;
+      }
+      .whitespace {
+      }
+      .identifier {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      // 'abc'.replace(/a(b)c/, function(str, $1) {
+      //   console.log($1);
+      // });
+      // 'abc'.replace(/a(b)c/, function(str, $1) {
+      //   return $1 + $1;
+      // });
+
+      // let lastIndex = 0;
+      // let token;
+      // do {
+      //   token = inputElement.exec(source);
+      //   console.log(token);
+      // } while (inputElement.lastIndex - lastIndex == token.length);
+      // var container = document.getElementById('container');
+      // var source = `
+      //   function sleep(t) {
+      //     return new Promise(function(resolve) {
+      //       setTimeout(resolve, t);
+      //     });
+      //   }
+      // `;
+
+      // const regexp = /(function|new|return)|([ \t\n\r]+)|([a-zA-Z][a-zA-Z0-9]*)|([\(\)\{\}\,\;])/g;
+      // var dictionary = ['keywords', 'whitespace', 'identifier', 'punctuator'];
+      // var token = null;
+      // var lastIndex = 0;
+      // do {
+      //   lastIndex = regexp.lastIndex;
+      //   token = regexp.exec(source);
+      //   if (!token) break;
+      //   let text = document.createElement('span');
+      //   text.textContent = token[0];
+      //   for (let i = 0; i < 5; i++) {
+      //     if (token[i]) {
+      //       text.classList.add(dictionary[i - 1]);
+      //       console.log('dictionary', dictionary[i - 1], token[0]);
+      //     }
+      //   }
+      //   container.appendChild(text);
+      // } while (token);
+    </script>
+  </body>
+</html>

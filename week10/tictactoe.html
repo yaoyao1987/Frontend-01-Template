@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #board {
+        width: 350px;
+      }
+      .cell {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid white;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="board"></div>
+    <script>
+      let pattern = new Array(9).fill(0);
+      let color = 1;
+      function render() {
+        let board = document.getElementById('board');
+        board.innerHTML = '';
+        for (let i = 0; i < 9; i++) {
+          let cell = document.createElement('div');
+          cell.classList.add('cell');
+          cell.innerText = pattern[i] === 2 ? '❌' : pattern[i] === 1 ? '⭕️' : '';
+          const x = i % 3;
+          const y = Math.floor(i / 3);
+          cell.addEventListener('click', () => move(x, y));
+          board.appendChild(cell);
+        }
+      }
+      function move(x, y) {
+        pattern[y * 3 + x] = color;
+        if (check(pattern, color)) {
+          console.log((color === 2 ? '❌' : color === 1 ? '⭕️' : '') + ' will win');
+        }
+        color = 3 - color;
+        render();
+      }
+      function check(pattern, color) {
+        // 横向
+        for (let i = 0; i < 3; i++) {
+          if (pattern[i * 3] === color && pattern[i * 3 + 1] === color && pattern[i * 3 + 2] === color) {
+            return true;
+          }
+        }
+
+        // 纵向
+        for (let i = 0; i < 3; i++) {
+          if (pattern[i] === color && pattern[i + 3] === color && pattern[i + 6] === color) {
+            return true;
+          }
+        }
+
+        // 斜向1，数组0，4，8
+        if (pattern[0] === color && pattern[4] === color && pattern[8] === color) {
+          return true;
+        }
+
+        // 斜向2,数组2，4，6
+        if (pattern[2] === color && pattern[4] === color && pattern[6] === color) {
+          return true;
+        }
+
+        return false;
+      }
+      function clone(pattern) {
+        return JSON.parse(JSON.stringify(pattern));
+      }
+      function willWin(pattern, color) {
+        for (let i = 0; i < 3; i++) {
+          if (pattern[i * 3] || pattern[i * 3 + 1] || pattern[i * 3 + 2]) {
+            continue;
+          }
+          let tmp = clone(pattern);
+          tmp[i * 3] = color;
+          if (check(tmp, color)) {
+            tmp[i * 3] = 0;
+            return true;
+          }
+          tmp[i][j] = 0;
+        }
+      }
+      render();
+    </script>
+  </body>
+</html>

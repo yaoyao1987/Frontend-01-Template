@@ -681,7 +681,14 @@
 
   // https://www.w3.org/TR/service-workers/
 
-  names = filterOut(names, ['ServiceWorker', 'ServiceWorkerContainer', 'ServiceWorkerRegistration']);
+  names = filterOut(names, [
+    'ServiceWorker',
+    'ServiceWorkerContainer',
+    'ServiceWorkerRegistration',
+    'Cache',
+    'CacheStorage',
+    'PeriodicSyncManager',
+  ]);
 
   // https://www.w3.org/TR/orientation-event/
 
@@ -776,11 +783,16 @@
 
   names = filterOut(names, ['TouchList', 'TouchEvent', 'Touch']);
 
-  // //
+  // https://drafts.csswg.org/web-animations/
 
-  // names = filterOut(names, []);
+  names = filterOut(names, [
+  'AnimationEvent',
+  'AnimationEffect',
+  'Animation',
+  'KeyframeEffect',
+  ]);
 
-  // //
+  // https://fetch.spec.whatwg.org/
 
   // names = filterOut(names, []);
 
