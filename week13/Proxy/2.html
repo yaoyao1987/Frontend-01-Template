@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #color {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="r">
+    <input type="text" id="g">
+    <input type="text" id="b">
+    <div id="color"></div>
+    <script>
+      let handlers = new Map();
+      let reactivities = new Map();
+      let usedReactivities = [];
+      // let object = {
+      //   a: 1,
+      //   b: 1,
+      // };
+
+      let object = {
+        a: { x: 3 },
+        b: 1,
+      };
+
+      function reactive(obj) {
+        if (reactivities.has(obj)) {
+          return reactivities.get(obj);
+        }
+
+        let proxy = new Proxy(object, {
+          get(obj, prop) {
+            usedReactivities.push([obj, prop]);
+            if (typeof obj[prop] === 'object') {
+              return reactive(obj[prop]);
+            }
+            return obj[prop];
+          },
+          set(obj, prop, val) {
+            obj[prop] = val;
+            if (handlers.get(obj)) {
+              if (handlers.get(obj).get(prop)) {
+                for (const handler of handlers.get(obj).get(prop)) {
+                  handler();
+                }
+              }
+            }
+            return obj[prop];
+          },
+        });
+
+        reactivities.set(obj, proxy);
+        reactivities.set(proxy, proxy);
+        return proxy;
+      }
+
+      function effect(handler) {
+        usedReactivities = [];
+        handler();
+        for (const usedReactivity of usedReactivities) {
+          let [obj, prop] = usedReactivity;
+          if (!handlers.has(obj)) {
+            handlers.set(obj, new Map());
+          }
+
+          if (!handlers.get(obj).has(prop)) {
+            handlers.get(obj).set(prop, []);
+          }
+          handlers
+            .get(obj)
+            .get(prop)
+            .push(handler);
+        }
+      }
+
+      // let dummy;
+      // let proxy = reactive(object);
+
+      // effect(() => (dummy = proxy.a));
+      // console.log(dummy);
+      // proxy.a = 2;
+
+      // let v12, v1, v2;
+      // let p1 = reactive({ a: 1 });
+      // let p2 = reactive({ a: 2 });
+
+      // effect(() => (v12 = p1.a + p2.a));
+      // effect(() => (v1 = p1.a));
+      // effect(() => (v2 = p2.a));
+
+      // let v;
+      // let p1 = reactive({ a: 1 });
+      // let p2 = reactive({ a: 2 });
+
+      // let b = false;
+
+      // effect(() => (v = b ? 2 : p1.a));
+      // console.log(b);
+      // b = true;
+      // p1.a = 10;
+
+      let v;
+      let p = reactive(object);
+
+      effect(() => (v = p.a.x));
+      console.log(v);
+
+      p.a.x = 10;
+    </script>
+  </body>
+</html>
