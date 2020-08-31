@@ -1,0 +1,10 @@
+{
+  "presets": ["@babel/env"],
+  "plugins": [
+    "istanbul",
+    [
+      "@babel/plugin-transform-react-jsx",
+      { "pragma": "createElement" },
+    ]
+  ]
+}

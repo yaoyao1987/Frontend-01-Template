@@ -1,0 +1,16 @@
+{
+  "all": true,
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "include": [
+    "src/**/*.js"
+  ],
+  "require": [
+    "esm"
+  ],
+  "check-coverage": false,
+  "extends": "@istanbuljs/nyc-config-babel"
+}
